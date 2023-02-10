@@ -1,22 +1,56 @@
+// Dependencies
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
+import { GetStaticProps } from 'next'
+// Components
+import Post, { PostProps } from '../components/Post'
+// Database
+import prisma from '../lib/prisma'
+// Style
 import { Inter } from '@next/font/google'
 import { SiInstagram, SiTiktok } from 'react-icons/Si'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+export const getStaticProps: GetStaticProps = async () => {
+  const feed = await prisma.post.findMany({
+    where: { published: true },
+    include: {
+      author: {
+        select: { name: true },
+      },
+    },
+  });
+  return {
+    props: { feed },
+    revalidate: 10,
+  };
+};
+
+type Props = {
+  feed: PostProps[]
+}
+
+const Home: React.FC<Props> = (props) => {
 
 
   return (
 
+
     <>
+
 
       <main className='mb-2'>  
       
         <div className="container px-4 md:px-0 max-w-6xl mx-auto -mt-32">
           
+          {props.feed.map((post) => (
+            <div key={post.id} className='post'>
+              <Post post={post} />
+            </div>
+          ))}
+
           <div className="mx-0 sm:mx-6">
             
 
@@ -131,46 +165,13 @@ export default function Home() {
                 </div>
               </div>
               
-            
           </div>
         
-
         </div>
-
-
-        <footer>	
-          <div className="container max-w-6xl mx-auto flex items-center px-2 pt-8">
-
-            <div className="w-full mx-auto flex flex-wrap items-center">
-              <div className="flex w-full md:w-1/2 justify-center md:justify-start text-white font-extrabold">
-                <a className="text-gray-700 no-underline hover:text-gray-700 hover:no-underline" href="#">
-                  <span className="text-base text-gray-600">The Girlie From Da 808</span>
-                </a>
-              </div>
-              <div className="flex w-full pt-2 content-center justify-between md:w-1/2 md:justify-end">
-                <ul className="list-reset flex justify-center flex-1 md:flex-none items-center">
-                  <li>
-                  <a className="inline-block py-2 px-3 text-gray-600 hover:text-gray-400 no-underline" href="#">Active</a>
-                  </li>
-                  <li>
-                  <a className="inline-block text-gray-600 no-underline hover:text-gray-400 hover:underline py-2 px-3" href="#">link</a>
-                  </li>
-                  <li>
-                  <a className="inline-block text-gray-600 no-underline hover:text-gray-400 hover:underline py-2 px-3" href="#">link</a>
-                  </li>
-                  <li>
-                  <a className="inline-block text-gray-600 no-underline hover:text-gray-400 hover:underline py-2 px-3" href="#">link</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-              
-
-          
-          </div>
-        </footer>
 
       </main>
     </>
   )
 }
+
+export default Home;

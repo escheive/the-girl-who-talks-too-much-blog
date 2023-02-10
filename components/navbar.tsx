@@ -1,8 +1,12 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import NavLink from 'next/link'
+import { useRouter } from 'next/router'
 import { SiInstagram, SiTiktok } from 'react-icons/Si'
 
 export default function navbar() {
+
+    const router = useRouter();
 
     return (
 
@@ -15,9 +19,9 @@ export default function navbar() {
             </Head>
 
             <div className="w-full m-0 p-0 bg-cover bg-bottom" style={{ height: '60vh', maxHeight: '460px' }}>
-                <div className="container max-w-4xl mx-auto pt-16 md:pt-32 text-center break-normal">
+                <div className="container max-w-5xl mx-auto pt-16 md:pt-32 text-center break-normal">
                 
-                    <p className="text-white font-extrabold text-3xl md:text-5xl lg:text-6xl">
+                    <p className="text-white font-extrabold text-3xl md:text-5xl lg:text-6xl xl:text-7xl">
                 The Girl Who Talks Too Much
                     </p>
                     <p className="text-xl md:text-2xl text-gray-500">From the 808</p>
@@ -29,16 +33,13 @@ export default function navbar() {
                     <div className="flex w-1/2 pl-4 text-md">
                         <ul className="list-reset flex justify-between flex-1 md:flex-none items-center">
                         <li className="mr-2">
-                        <Link href='/' className="inline-block py-2 px-2 text-gray-600 no-underline hover:text-gray-400">HOME</Link>
+                        <Link href='/' className={`${ router.pathname === '/' ? 'text-gray-700 font-bold hover:text-gray-400' : 'hover:text-gray-400' } 'inline-block py-2 px-2 text-gray-600 no-underline' `}>HOME</Link>
                         </li>
                         <li className="mr-2">
-                        <Link className="inline-block text-gray-600 no-underline hover:text-gray-400 py-2 px-2" href="/posts/all">POSTS</Link>
+                        <Link className={`${ router.pathname === '/posts/all' ? 'text-gray-700 font-bold hover:text-gray-400' : 'hover:text-gray-400' } 'inline-block py-2 px-2 text-gray-600 no-underline' `} href="/posts/all">POSTS</Link>
                         </li>
                         <li className="mr-2">
-                        <Link className="inline-block text-gray-600 no-underline hover:text-gray-400 py-2 px-2" href="#">LINK</Link>
-                        </li>
-                        <li className="mr-2">
-                        <Link className="inline-block text-gray-600 no-underline hover:text-gray-400 py-2 px-2" href="post_vue.html">POST_VUE</Link>
+                        <Link className={`${ router.pathname === '/contact' ? 'text-gray-700 font-bold hover:text-gray-400' : 'hover:text-gray-400' } 'inline-block py-2 px-2 text-gray-600 no-underline' `} href="/contact">CONTACT</Link>
                         </li>
                         </ul>
                     </div>
