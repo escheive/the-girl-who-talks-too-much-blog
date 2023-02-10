@@ -27,7 +27,7 @@ const Post: React.FC<{ post: PostProps }> = ({ post }) => {
 
         <div className="w-full md:w-1/3 flex flex-col flex-grow flex-shrink">
             <div className="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow-lg">
-            <p className="w-full text-gray-600 text-xs md:text-sm pt-6 px-6">{authorName}</p>
+            <p className="w-full text-gray-600 text-sm md:text-base pt-6 px-6">{authorName}</p>
             <div className="w-full font-bold text-xl text-gray-900 px-6">{post.title}</div>
             <ReactMarkdown 
                 className="text-gray-800 font-serif text-base px-6 mb-5"

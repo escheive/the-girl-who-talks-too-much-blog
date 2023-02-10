@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { GetStaticProps } from 'next'
 // Components
 import Post, { PostProps } from '../components/Post'
+import PostTwo, { PostTwoProps } from '@/components/PostTwo'
 // Database
 import prisma from '../lib/prisma'
 // Style
@@ -24,7 +25,7 @@ export const getStaticProps: GetStaticProps = async () => {
   });
   return {
     props: { feed },
-    revalidate: 10,
+    revalidate: 10
   };
 };
 
@@ -32,8 +33,9 @@ type Props = {
   feed: PostProps[]
 }
 
-const Home: React.FC<Props> = (props) => {
 
+const Home: React.FC<Props> = (props) => {
+  
 
   return (
 
@@ -44,20 +46,28 @@ const Home: React.FC<Props> = (props) => {
       <main className='mb-2'>  
       
         <div className="container px-4 md:px-0 max-w-6xl mx-auto -mt-32">
-          
-          {props.feed.map((post) => (
-            <div key={post.id} className='post'>
-              <Post post={post} />
-            </div>
-          ))}
 
           <div className="mx-0 sm:mx-6">
             
-
-            <div className="bg-gray-200 w-full text-xl md:text-2xl text-gray-800 leading-normal rounded-t">
+            <div className="grid grid-cols-6 gap-4 bg-gray-200 w-full text-gray-800 leading-normal rounded-t">
               
-            
-              <div className="flex h-full bg-white rounded overflow-hidden shadow-lg">
+              {props.feed.map((post, i) => {
+                if (i % 4 == 0 || i == 0) {
+                  return (
+                    <div key={post.id} className='post col-span-6'>
+                      <Post post={post} />
+                    </div>
+                  )
+                } else {
+                  return (
+                    <div key={post.id} className="post w-full md:col-span-2 col-span-3">
+                      <PostTwo post={post} />
+                    </div>
+                  )
+                }
+              })}
+
+              {/* <div className="flex h-full bg-white rounded overflow-hidden shadow-lg">
                 <a href="post.html" className="flex flex-wrap no-underline hover:no-underline">
                   <div className="w-full md:w-2/3 rounded-t">	
                     <img src="https://source.unsplash.com/collection/494263/800x600" className="h-full w-full shadow"/>
@@ -150,7 +160,7 @@ const Home: React.FC<Props> = (props) => {
                 </div>
 
 
-              </div>
+              </div> */}
               
                   
             </div>
