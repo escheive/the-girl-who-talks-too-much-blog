@@ -4,7 +4,7 @@ export default function Footer() {
 
     return (
 
-        <footer>	
+        <footer className='mb-2'>	
           <div className="container max-w-6xl mx-auto flex items-center px-2 pt-8">
 
             <div className="w-full mx-auto flex flex-wrap items-center">

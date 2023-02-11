@@ -1,12 +1,42 @@
-import Head from 'next/head'
-import Link from 'next/link'
-import NavLink from 'next/link'
-import { useRouter } from 'next/router'
-import { SiInstagram, SiTiktok } from 'react-icons/Si'
+
+// Dependencies
+import { useState } from 'react';
+import Head from 'next/head';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+// Icons
+import { SiInstagram, SiTiktok } from 'react-icons/Si';
+// Floating ui dependencies
+import { safePolygon, useFloating, useHover, useInteractions } from '@floating-ui/react';
+
+
 
 export default function navbar() {
 
+
+    // usestate for floating-ui hover events
+    const [isOpen, setIsOpen] = useState(false)
+
+    // For use with floating-ui and positioning tooltips
+    const {x, y, refs, context} = useFloating({
+        open: isOpen,
+        onOpenChange: setIsOpen,
+    });
+    
+    // useHover function for floating-ui
+    const { getFloatingProps, getReferenceProps } = useInteractions([
+        useHover(context, {
+            restMs: 150,
+            delay: {open: 600},
+            handleClose: safePolygon({
+                restMs: 50,
+            }),
+        }),
+    ])
+    
+    // router function so that the nav can dynamically render classes based on which link is active
     const router = useRouter();
+
 
     return (
 
@@ -21,9 +51,24 @@ export default function navbar() {
             <div className="w-full m-0 p-0 bg-cover bg-bottom" style={{ height: '60vh', maxHeight: '460px' }}>
                 <div className="container max-w-5xl mx-auto pt-16 md:pt-32 text-center break-normal">
                 
-                    <p className="text-white font-extrabold text-3xl md:text-5xl lg:text-6xl xl:text-7xl">
-                The Girl Who Talks Too Much
+                    <p className="text-white font-extrabold text-3xl md:text-5xl lg:text-6xl xl:text-7xl" id='ui-reference' ref={refs.setReference} {...getReferenceProps()}>
+                        The Girl Who Talks Too Much
                     </p>
+                    {isOpen && (
+                        <div
+                            className='ui-floating bg-gray-200 text-gray-500 p-5 rounded-lg absolute border-gray'
+                            ref={refs.setFloating}
+                            style={{
+                                top: y ?? 0,
+                                left: x ?? 0,
+                                width: 'max-content',
+                            }}
+                            {...getFloatingProps()}
+                        >
+                            I don't actually talk that much!
+                            <div id='arrow'></div>
+                        </div>
+                    )}
                     <p className="text-xl md:text-2xl text-gray-500">From the 808</p>
                 </div>
 
@@ -46,12 +91,14 @@ export default function navbar() {
 
 
                     <div className="flex w-1/2 justify-end content-center">		
-                        <a className="inline-block text-gray-600 no-underline hover:text-gray-400 text-center h-10 p-2 md:h-auto md:p-4 avatar" data-tippy-content="@twitter_handle" href="https://twitter.com/intent/tweet?url=#">
-                        <SiInstagram size={24}/>
+                        <a className="inline-block text-gray-600 no-underline hover:text-gray-400 text-center h-10 p-2 md:h-auto md:p-4 avatar" data-tippy-content="@instagram_handle" rel='noreferrer' href="https://www.instagram.com/katee.emi/" target='_blank'>
+                        <SiInstagram size={24} />
                         </a>
-                        <a className="inline-block text-gray-600 no-underline hover:text-gray-400 text-center h-10 p-2 md:h-auto md:p-4 avatar" data-tippy-content="#facebook_id" href="https://www.facebook.com/sharer/sharer.php?u=#">
+
+                        <a className="inline-block text-gray-600 no-underline hover:text-gray-400 text-center h-10 p-2 md:h-auto md:p-4 avatar" data-tippy-content="#facebook_id" rel='noreferrer' href="https://www.tiktok.com/@kateemi808" target='_blank'>
                         <SiTiktok size={24}/>
                         </a>
+
                     </div>
 
                     </div>
