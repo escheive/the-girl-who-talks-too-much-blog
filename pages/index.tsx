@@ -5,8 +5,8 @@ import Link from 'next/link'
 import { GetStaticProps } from 'next'
 import superjson from 'superjson'
 // Components
-import Post, { PostProps } from '../components/Post'
-import PostTwo, { PostTwoProps } from '@/components/PostTwo'
+import Post, { PostProps } from '../components/Posts/Post'
+import PostTwo, { PostTwoProps } from '@/components/Posts/PostTwo'
 // Database
 import prisma from '../lib/prisma'
 // Style

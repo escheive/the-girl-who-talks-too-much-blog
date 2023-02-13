@@ -38,10 +38,10 @@ const Post: React.FC<PostProps> = (props) => {
               <header className="mb-4 lg:mb-6 not-format">
                 <address className="flex items-center mb-6 not-italic">
                     <div className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
-                        <img className="mr-4 w-16 h-16 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-2.jpg" alt="Jese Leos" />
+                        <img className="mr-4 w-16 h-16 rounded-full" src="" alt="Katee" />
                         <div>
                             <a href="#" rel="author" className="text-xl font-bold text-gray-900 dark:text-white">{props.authorName}</a>
-                            <p className="text-base font-light text-gray-500 dark:text-gray-400">Graphic Designer, educator & CEO Flowbite</p>
+                            <p className="text-base font-light text-gray-500 dark:text-gray-400">{Post.createdAt}</p>
                             <p className="text-base font-light text-gray-500 dark:text-gray-400"><time>{props.created_at}</time></p>
                         </div>
                     </div>
@@ -51,7 +51,7 @@ const Post: React.FC<PostProps> = (props) => {
               <p className="lead">{props.content}</p>
           </article>
       </div>
-      
+
       <section className="not-format">
         <div className="flex justify-between items-center mb-6">
             <h2 className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Discussion (20)</h2>
