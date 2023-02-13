@@ -86,6 +86,9 @@ export default function navbar() {
                         <li className="mr-2">
                         <Link className={`${ router.pathname === '/contact' ? 'text-gray-700 font-bold hover:text-gray-400' : 'hover:text-gray-400' } 'inline-block py-2 px-2 text-gray-600 no-underline' `} href="/contact">CONTACT</Link>
                         </li>
+                        <li className="mr-2">
+                        <Link className={`${ router.pathname === '/posts/create' ? 'text-gray-700 font-bold hover:text-gray-400' : 'hover:text-gray-400' } 'inline-block py-2 px-2 text-gray-600 no-underline' `} href="/posts/create">CREATE</Link>
+                        </li>
                         </ul>
                     </div>
 
