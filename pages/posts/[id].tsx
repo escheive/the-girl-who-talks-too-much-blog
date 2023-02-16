@@ -4,7 +4,7 @@ import prisma from '../../lib/prisma';
 
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const post = await prisma.post.findUnique({
+  let post = await prisma.post.findUnique({
     where: {
       id: String(params?.id),
     },
@@ -14,6 +14,9 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
       },
     },
   });
+
+  post = JSON.parse(JSON.stringify(post))
+
   return {
     props: post,
   };
@@ -41,8 +44,8 @@ const Post: React.FC<PostProps> = (props) => {
                         <img className="mr-4 w-16 h-16 rounded-full" src="" alt="Katee" />
                         <div>
                             <a href="#" rel="author" className="text-xl font-bold text-gray-900 dark:text-white">{props.authorName}</a>
-                            <p className="text-base font-light text-gray-500 dark:text-gray-400">{Post.createdAt}</p>
-                            <p className="text-base font-light text-gray-500 dark:text-gray-400"><time>{props.created_at}</time></p>
+                            <p className="text-base font-light text-gray-500 dark:text-gray-400">{props.createdAt.slice(0, 10)}</p>
+                            
                         </div>
                     </div>
                 </address>

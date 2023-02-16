@@ -56,7 +56,7 @@ const Home: React.FC<Props> = (props) => {
 
           <div className="mx-0 sm:mx-6">
             
-            <div className="grid grid-cols-6 gap-x-4 gap-y-10 bg-gray-200 w-full text-gray-800 leading-normal rounded-t">
+            {/* <div className="grid grid-cols-6 gap-x-4 gap-y-10 bg-gray-200 w-full text-gray-800 leading-normal rounded-t">
               
               {props.feed.map((post, i) => {
                 if (i % 4 == 0 || i == 0) {
@@ -68,6 +68,26 @@ const Home: React.FC<Props> = (props) => {
                 } else {
                   return (
                     <div key={post.id} className="post w-full md:col-span-2 col-span-3">
+                      <PostTwo post={post} />
+                    </div>
+                  )
+                }
+              })}
+              
+                  
+            </div> */}
+            <div className="bg-gray-200 w-full text-xl md:text-2xl text-gray-800 leading-normal rounded-t flex flex-wrap justify-between py-12 -mx-6">
+              
+              {props.feed.map((post, i) => {
+                if (i % 4 == 0 || i == 0) {
+                  return (
+                    <div key={post.id} className='post col-span-6'>
+                      <Post post={post} />
+                    </div>
+                  )
+                } else {
+                  return (
+                    <div key={post.id} className="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
                       <PostTwo post={post} />
                     </div>
                   )
