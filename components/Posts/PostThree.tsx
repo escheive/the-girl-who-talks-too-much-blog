@@ -23,7 +23,7 @@ const PostThree: React.FC<{ post: PostThreeProps }> = ({ post }) => {
 
     return (
 
-        <div className="w-full md:w-3/5 p-6 flex flex-col flex-grow flex-shrink">
+        <div className="w-full md:w-2/3 p-6 flex flex-col flex-grow flex-shrink">
             <div className="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow-lg">
                 <Link href={`/posts/${post.id}`} className="no-underline hover:no-underline flex flex-wrap">
                     <img src="https://source.unsplash.com/collection/225/800x600" className="h-full w-full rounded-t pb-6"/>

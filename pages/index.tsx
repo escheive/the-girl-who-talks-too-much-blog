@@ -1,16 +1,11 @@
 // Dependencies
-import Head from 'next/head'
-import Image from 'next/image'
-import Link from 'next/link'
 import { GetStaticProps } from 'next'
-import superjson from 'superjson'
 // Components
 import Post, { PostProps } from '../components/Posts/Post'
-import PostTwo, { PostTwoProps } from '@/components/Posts/PostTwo'
+import PostTwo from '@/components/Posts/PostTwo'
 // Database
 import prisma from '../lib/prisma'
 // Style
-import { Inter } from '@next/font/google'
 import { SiInstagram, SiTiktok } from 'react-icons/Si'
 
 
