@@ -1,7 +1,37 @@
 import Link from 'next/link';
 import { SiInstagram, SiTiktok } from 'react-icons/Si'
+import { GetServerSideProps } from 'next';
+import prisma from '../../lib/prisma';
+import Post, { PostProps } from '@/components/Posts/Post'
+import PostTwo, { PostTwoProps } from '@/components/Posts/PostTwo'
+import PostThree, { PostThreeProps } from '@/components/Posts/PostThree';
+import PostFour, { PostFourProps } from '@/components/Posts/PostFour';
 
-export default function FirstPost() {
+
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  let feed = await prisma.post.findMany({
+    where: { published: true },
+    include: {
+      author: {
+        select: { name: true },
+      },
+    },
+  });
+
+  feed = JSON.parse(JSON.stringify(feed))
+  
+  return {
+    props: { feed },
+    // revalidate: 10
+  };
+};
+
+// setting props to postprops
+type Props = {
+  feed: PostProps[]
+}
+
+const AllPosts: React.FC<Props> = (props) => {
 
   return (
 
@@ -12,10 +42,35 @@ export default function FirstPost() {
         <div className="mx-0 sm:mx-6">
           
 
-          <div className="bg-gray-200 w-full text-xl md:text-2xl text-gray-800 leading-normal rounded-t">
+          <div className="bg-gray-200 w-full text-xl md:text-2xl text-gray-800 leading-normal rounded-t flex flex-wrap justify-between my-12 -mx-6">
+
+              {props.feed.map((post, i) => {
+                if (i == 0 || i == 6 ) {
+                  console.log('1')
+                  i = 0
+                  return (
+                    <Post post={post} key={post.id} />
+                  )
+                } if (i == 1 || i == 5 ) {
+                  console.log('2')
+                  return (
+                    <PostTwo post={post} key={post.id} />
+                  )
+                } if (i == 2 || i == 4 ) {
+                  console.log('3')
+                  return (
+                    <PostThree post={post} key={post.id} />
+                  )
+                } if ( i == 3 ) {
+                  console.log('4')
+                  return (
+                    <PostFour post={post} key={post.id} />
+                  )
+                }
+              })}
             
           
-            <div className="flex h-full bg-white rounded overflow-hidden shadow-lg">
+            {/* <div className="w-full flex h-full bg-white rounded overflow-hidden shadow-lg">
               <a href="post.html" className="flex flex-wrap no-underline hover:no-underline">
                 <div className="w-full md:w-2/3 rounded-t">	
                   <img src="https://source.unsplash.com/collection/494263/800x600" className="h-full w-full shadow"/>
@@ -145,7 +200,7 @@ export default function FirstPost() {
                 </div>
               </div>
                 
-            </div>
+            </div> */}
                   
           </div>
                 
@@ -165,3 +220,5 @@ export default function FirstPost() {
     </main>
   );
 }
+
+export default AllPosts;

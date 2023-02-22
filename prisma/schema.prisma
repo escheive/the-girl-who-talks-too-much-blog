@@ -14,6 +14,8 @@ model Post {
   id        String    @default(cuid()) @id
   title     String
   content   String?
+  mainImage String
+  images    String[]
   published Boolean   @default(false)
   createdAt DateTime  @default(now()) @map(name: "created_at")
   updatedAt DateTime  @updatedAt @db.Date      @map(name: "updated_at")
@@ -25,6 +27,7 @@ model Post {
 model User {
   id            String    @default(cuid()) @id
   name          String?
+  image         String
   email         String?   @unique
   createdAt     DateTime  @default(now()) @db.Date @map(name: "created_at")
   updatedAt     DateTime  @updatedAt @db.Date      @map(name: "updated_at")

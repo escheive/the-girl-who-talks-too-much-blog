@@ -21,19 +21,17 @@ export type PostProps = {
 const Post: React.FC<{ post: PostProps }> = ({ post }) => {
 
   const authorName = post.author ? post.author.name : "Unknown author";
-  console.log(post.createdAt)
 
   return (
 
-    <div className="flex h-full bg-white rounded overflow-hidden shadow-lg">
-        <Link href={`/posts/${post.id}`} className="w-full flex flex-wrap no-underline hover:no-underline">
+    <div className="w-full flex h-full bg-white rounded overflow-hidden shadow-lg">
+      <Link href={`/posts/${post.id}`} className="w-full flex flex-wrap no-underline hover:no-underline">
         <div className="w-full md:w-2/3 rounded-t">	
-            <Image 
-              src="https://source.unsplash.com/collection/494263/800x600" 
-              className="h-full w-full shadow" 
-              width={800} 
-              height={600}
-            />
+          <img
+            src="https://source.unsplash.com/collection/494263/800x600"
+            alt='img'
+            className="h-full w-full shadow" 
+          />
         </div>
 
         <div className="w-full md:w-1/3 flex flex-col flex-grow flex-shrink">
