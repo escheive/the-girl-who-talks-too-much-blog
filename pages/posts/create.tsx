@@ -43,8 +43,10 @@ export default function create() {
             return [
                 ...s,
                 {
-                    type: 'file',
+                    type: 'text',
                     class: 'my-2',
+                    placeholder: 'Image url here',
+                    value: ''
                 }
             ];
         });
@@ -96,7 +98,7 @@ export default function create() {
 
             </div>
 
-            <div className="flex flex-col items-center my-4">
+            <form action="POST" className="flex flex-col items-center my-4">
 
                 {arr.map((item, i) => {
                     if ( item.type == 'textArea' ) {
@@ -122,7 +124,9 @@ export default function create() {
                         />
                     );
                 })}
-            </div>
+
+                <button type='submit' className="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Post</button>
+            </form>
 
         </div>
 
