@@ -1,13 +1,8 @@
 
 import { useState } from "react";
 
-const inputArr = [
-    {
-        type: 'text',
-        class: 'w-1/2',
-        id: 1,
-        value: ''
-    }
+const inputArr: any[] | (() => any[]) = [
+    
 ];
 
 
@@ -20,8 +15,9 @@ export default function create() {
             return [
                 ...s,
                 {
-                    type: 'text',
-                    class: 'w-3/4',
+                    type: 'textArea',
+                    class: 'w-3/4 my-1 py-4',
+                    placeholder: 'Paragraph',
                     value: '',
                 }
             ];
@@ -34,7 +30,8 @@ export default function create() {
                 ...s,
                 {
                     type: 'text',
-                    class: 'w-1/2',
+                    class: 'w-1/2 my-2',
+                    placeholder: 'Title',
                     value: '',
                 }
             ];
@@ -47,8 +44,7 @@ export default function create() {
                 ...s,
                 {
                     type: 'file',
-                    class: 'create-image',
-                    value: '',
+                    class: 'my-2',
                 }
             ];
         });
@@ -100,13 +96,26 @@ export default function create() {
 
             </div>
 
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center my-4">
 
                 {arr.map((item, i) => {
+                    if ( item.type == 'textArea' ) {
+                        return (
+                            <textarea
+                                onChange={handleChange}
+                                className={item.class}
+                                placeholder={item.placeholder}
+                                value={item.value}
+                                id={i}
+                                type={item.type}
+                            />
+                        )
+                    }
                     return (
                         <input
                             onChange={handleChange}
                             className={item.class}
+                            placeholder={item.placeholder}
                             value={item.value}
                             id={i}
                             type={item.type}
