@@ -100,6 +100,13 @@ export default function create() {
 
             <form action="POST" className="flex flex-col items-center my-4">
 
+                <input
+                    name='title'
+                    className='my-4 w-1/2 py-4'
+                    placeholder='Post Title'
+                    type='text'
+                />
+
                 {arr.map((item, i) => {
                     if ( item.type == 'textArea' ) {
                         return (
