@@ -4,6 +4,7 @@ import { useState } from "react";
 const inputArr = [
     {
         type: 'text',
+        class: 'w-1/2',
         id: 1,
         value: ''
     }
@@ -20,7 +21,7 @@ export default function create() {
                 ...s,
                 {
                     type: 'text',
-                    class: 'create-paragraph',
+                    class: 'w-3/4',
                     value: '',
                 }
             ];
@@ -33,7 +34,7 @@ export default function create() {
                 ...s,
                 {
                     type: 'text',
-                    class: 'create-title',
+                    class: 'w-1/2',
                     value: '',
                 }
             ];
@@ -99,16 +100,21 @@ export default function create() {
 
             </div>
 
-            {arr.map((item, i) => {
-                return (
-                    <input
-                        onChange={handleChange}
-                        value={item.value}
-                        id={i}
-                        type={item.type}
-                    />
-                );
-            })}
+            <div className="flex flex-col items-center">
+
+                {arr.map((item, i) => {
+                    return (
+                        <input
+                            onChange={handleChange}
+                            className={item.class}
+                            value={item.value}
+                            id={i}
+                            type={item.type}
+                        />
+                    );
+                })}
+            </div>
+
         </div>
 
     );
