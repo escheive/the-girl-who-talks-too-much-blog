@@ -47,23 +47,19 @@ const AllPosts: React.FC<Props> = (props) => {
 
               {props.feed.map((post, i) => {
                 if (i == 0 || i == 6 ) {
-                  console.log('1')
                   i = 0
                   return (
                     <Post post={post} key={post.id} />
                   )
                 } if (i == 1 || i == 5 ) {
-                  console.log('2')
                   return (
                     <PostTwo post={post} key={post.id} />
                   )
                 } if (i == 2 || i == 4 ) {
-                  console.log('3')
                   return (
                     <PostThree post={post} key={post.id} />
                   )
                 } if ( i == 3 ) {
-                  console.log('4')
                   return (
                     <PostFour post={post} key={post.id} />
                   )

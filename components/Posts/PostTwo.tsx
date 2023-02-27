@@ -16,6 +16,12 @@ export type PostTwoProps = {
   published: boolean;
 };
 
+// https://www.w3resource.com/javascript-exercises/javascript-string-exercise-24.php
+// To truncate posts and limit the amount of words that will be displayed
+function truncate(str: string, no_words: any) {
+  return str.split(' ').splice(0, no_words).join(' ');
+}
+
 const PostTwo: React.FC<{ post: PostTwoProps }> = ({ post }) => {
 
   const authorName = post.author ? post.author.name : "Unknown author";
@@ -32,7 +38,7 @@ const PostTwo: React.FC<{ post: PostTwoProps }> = ({ post }) => {
           <div className="w-full font-bold sm:text-xl text-sm text-gray-900 px-6">{post.title}</div>
           <ReactMarkdown 
             className="text-gray-800 font-serif md:text-xl text-base px-6 mb-5"
-            children={post.content.substring(0, 4)}
+            children={truncate(post.content, 4)}
           />
         </div>
         </Link>

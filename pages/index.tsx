@@ -51,7 +51,7 @@ const Home: React.FC<Props> = (props) => {
 
           <div className="mx-0 sm:mx-6">
             
-            <div className="bg-gray-200 w-full text-xl md:text-2xl text-gray-800 leading-normal rounded-t flex flex-wrap justify-between my-12 -mx-6">
+            <div className="bg-gray-200 w-full text-xl md:text-2xl text-gray-800 leading-normal rounded-t flex flex-wrap justify-between items-center my-12">
               
               {props.feed.map((post, i) => {
                 if (i % 4 == 0 || i == 0) {
