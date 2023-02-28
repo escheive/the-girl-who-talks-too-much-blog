@@ -60,6 +60,7 @@ export default function create() {
         });
     };
 
+    // Function to remove the last added input from the page
     const removeInput = () => {
         arr.pop()
         setArr(s => {
@@ -69,6 +70,7 @@ export default function create() {
         });
     }
 
+    // Function to update the values on page as they are typed
     const handleChange = (e: { preventDefault: () => void; target: { id: any; value: string; }; }) => {
         e.preventDefault();
 
@@ -81,6 +83,7 @@ export default function create() {
         });
     };
 
+    // Function to handle submission of the form
     const handleSubmit = (e: { preventDefault: () => void; }) => {
         let content: any[] = [];
 

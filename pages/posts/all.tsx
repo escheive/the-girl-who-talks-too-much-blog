@@ -7,9 +7,11 @@ import PostTwo, { PostTwoProps } from '@/components/Posts/PostTwo'
 import PostThree, { PostThreeProps } from '@/components/Posts/PostThree';
 import PostFour, { PostFourProps } from '@/components/Posts/PostFour';
 
-
+// Function to query the database
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  // Using prisma to grab all posts
   let feed = await prisma.post.findMany({
+    // Only take posts that are marked as published
     where: { published: true },
     include: {
       author: {
@@ -18,11 +20,11 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     },
   });
 
+  // Take the data grabbed from db and turn it all into strings(this helps with the datetime value in the db)
   feed = JSON.parse(JSON.stringify(feed))
   
   return {
     props: { feed },
-    // revalidate: 10
   };
 };
 
@@ -45,6 +47,7 @@ const AllPosts: React.FC<Props> = (props) => {
 
           <div className="bg-gray-200 w-full text-xl md:text-2xl text-gray-800 leading-normal rounded-t flex flex-wrap justify-between my-12 -mx-6">
 
+              {/* Map over the posts and render them in different styles based on where they are on the page */}
               {props.feed.map((post, i) => {
                 if (i == 0 || i == 6 ) {
                   i = 0

@@ -7,7 +7,9 @@ const FORM_ENDPOINT = "https://public.herotofu.com/v1/bcf645a0-a5ea-11ed-a31e-75
 
 export default function ContactForm() {
 
+  // When form is submitted, will render a thank you display
   const [submitted, setSubmitted] = useState(false);
+  
   const handleSubmit = () => {
     setTimeout(() => {
       setSubmitted(true);
@@ -71,7 +73,7 @@ export default function ContactForm() {
         </div>
 
         <div className='mt-4'>
-          <button type="button" className="focus:outline-none text-white bg-blue-400 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-blue-900">Submit</button>
+          <button type="submit" className="focus:outline-none text-white bg-blue-400 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-blue-900">Submit</button>
         </div>
 
         </form>

@@ -13,6 +13,7 @@ import { SiInstagram, SiTiktok } from 'react-icons/Si'
 // db query for all blog posts that are published
 export const getStaticProps: GetStaticProps = async () => {
   let feed = await prisma.post.findMany({
+    // Only grab posts marked as published
     where: { published: true },
     include: {
       author: {
@@ -21,6 +22,7 @@ export const getStaticProps: GetStaticProps = async () => {
     },
   });
 
+  // This allows the datetime value to be turned into a string so we can work with it on the page
   feed = JSON.parse(JSON.stringify(feed))
   
   return {
@@ -35,7 +37,6 @@ type Props = {
 }
 
 
-// const Home: React.FC<Props> = (props) => {
 const Home: React.FC<Props> = (props) => {
   
 
