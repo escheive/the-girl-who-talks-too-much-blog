@@ -34,19 +34,21 @@ const Post: React.FC<PostProps> = (props) => {
     title = `${title} (Draft)`
   }
 
+  window.onload = window.scrollTo(0,350)
+
   return (
 
     <main className="-mt-32 bg-white dark:bg-gray-900">  
       
       {/* <!--Title--> */}
-      <div className="text-center py-24">
+      <div className="text-center pt-16 pb-8">
         <p className="text-sm md:text-base text-green-500 font-bold">{props.createdAt.slice(0, 10)}</p>
         <p className="text-lg md:text-xl text-green-500 font-bold">Written by {props.author?.name}</p>
-        <h1 className="font-bold break-normal text-3xl md:text-5xl">{title}</h1>
+        <h1 className="py-2 font-bold break-normal text-3xl md:text-5xl">{title}</h1>
       </div>
 
       {/* <!--image--> */}
-      <div className="container w-full max-w-6xl mx-auto bg-white bg-cover mt-8 rounded"></div>
+      <div className="container w-full max-w-6xl mx-auto bg-white bg-cover mt-8 rounded" style={{backgroundImage: `url('https://source.unsplash.com/collection/1118905/')`, height: '75vh'}}></div>
       
       {/* <!--Container--> */}
       <div className="container max-w-5xl mx-auto -mt-32">
