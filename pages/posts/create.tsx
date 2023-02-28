@@ -1,15 +1,21 @@
-
+// Dependencies
 import { useState } from "react";
 
+// An array for each input added so they can be rendered on the page
 const inputArr: any[] | (() => any[]) = [
     
 ];
 
+// Keeps track of number of inputs added so that they can be looped over and stored into an array
+let numberOfInputs = 0
+
 
 export default function create() {
 
+    // useState to dynamically render inputs on page
     const [arr, setArr] = useState(inputArr);
 
+    // Function to add a textarea input on the page
     const addTextarea = () => {
         setArr(s => {
             return [
@@ -24,6 +30,7 @@ export default function create() {
         });
     };
 
+    // Function to add a title input on the page
     const addTitle = () => {
         setArr(s => {
             return [
@@ -38,6 +45,7 @@ export default function create() {
         });
     };
 
+    // Function to add an image input on the page
     const addImage = () => {
         setArr(s => {
             return [
@@ -72,6 +80,11 @@ export default function create() {
             return newArr;
         });
     };
+
+    const handleSubmit = (e: { preventDefault: () => void; }) => {
+        let content: any[] = [];
+
+    }
 
     return (
 
@@ -108,6 +121,7 @@ export default function create() {
                 />
 
                 {arr.map((item, i) => {
+                    numberOfInputs += 1
                     if ( item.type == 'textArea' ) {
                         return (
                             <textarea
