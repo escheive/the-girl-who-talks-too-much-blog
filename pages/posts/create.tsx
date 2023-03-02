@@ -75,6 +75,7 @@ export default function create() {
         e.preventDefault();
 
         const index = e.target.id;
+        console.log(arr)
         setArr(s => {
             const newArr = s.slice();
             newArr[index].value = e.target.value;
@@ -85,8 +86,8 @@ export default function create() {
 
     // Function to handle submission of the form
     const handleSubmit = (e: { preventDefault: () => void; }) => {
-        let content: any[] = [];
-
+        let content: any[] = []
+        
     }
 
     return (
