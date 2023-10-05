@@ -1,30 +1,23 @@
 import Link from 'next/link';
 import { SiInstagram, SiTiktok } from 'react-icons/Si'
-import { GetServerSideProps } from 'next';
-import prisma from '../../lib/prisma';
+import { GetServerSideProps, GetStaticProps } from 'next';
+import { fetchPostsData } from '@/data';
 import Post, { PostProps } from '@/components/Posts/Post'
 import PostTwo, { PostTwoProps } from '@/components/Posts/PostTwo'
 import PostThree, { PostThreeProps } from '@/components/Posts/PostThree';
 import PostFour, { PostFourProps } from '@/components/Posts/PostFour';
 
-// Function to query the database
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  // Using prisma to grab all posts
-  let feed = await prisma.post.findMany({
-    // Only take posts that are marked as published
-    where: { published: true },
-    include: {
-      author: {
-        select: { name: true },
-      },
-    },
-  });
+// db query for all blog posts that are published
+export const getStaticProps: GetStaticProps = async () => {
+  // Fetch posts data using fetchPostsData function
+  let posts = await fetchPostsData();
 
-  // Take the data grabbed from db and turn it all into strings(this helps with the datetime value in the db)
-  feed = JSON.parse(JSON.stringify(feed))
-  
+  posts = JSON.parse(JSON.stringify(posts))
+
   return {
-    props: { feed },
+    props: {
+      posts,
+    },
   };
 };
 

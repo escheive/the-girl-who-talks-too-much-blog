@@ -5,6 +5,7 @@ import Post, { PostProps } from '../components/Posts/Post'
 import PostTwo from '@/components/Posts/PostTwo'
 // Database
 import prisma from '../lib/prisma'
+import { fetchPostsData } from '../data';
 // Style
 import { SiInstagram, SiTiktok } from 'react-icons/Si'
 
@@ -12,28 +13,22 @@ import { SiInstagram, SiTiktok } from 'react-icons/Si'
 
 // db query for all blog posts that are published
 export const getStaticProps: GetStaticProps = async () => {
-  let feed = await prisma.post.findMany({
-    // Only grab posts marked as published
-    where: { published: true },
-    include: {
-      author: {
-        select: { name: true },
-      },
-    },
-  });
+  // Fetch posts data using fetchPostsData function
+  let posts = await fetchPostsData();
 
-  // This allows the datetime value to be turned into a string so we can work with it on the page
-  feed = JSON.parse(JSON.stringify(feed))
-  
+  posts = JSON.parse(JSON.stringify(posts))
+
   return {
-    props: { feed },
-    revalidate: 10
+    props: {
+      posts,
+    },
   };
 };
 
+
 // setting props to postprops
 type Props = {
-  feed: PostProps[]
+  posts: PostProps[]
 }
 
 
@@ -54,7 +49,7 @@ const Home: React.FC<Props> = (props) => {
             
             <div className="bg-gray-200 w-full text-xl md:text-2xl text-gray-800 leading-normal rounded-t flex flex-wrap justify-between items-center my-12">
               
-              {props.feed.map((post, i) => {
+              {props.posts.map((post, i) => {
                 if (i % 4 == 0 || i == 0) {
                   return (
                     <Post post={post} key={post.id} />
@@ -89,3 +84,23 @@ const Home: React.FC<Props> = (props) => {
 }
 
 export default Home;
+
+// export const getStaticProps: GetStaticProps = async () => {
+//   let feed = await prisma.post.findMany({
+//     // Only grab posts marked as published
+//     where: { published: true },
+//     include: {
+//       author: {
+//         select: { name: true },
+//       },
+//     },
+//   });
+
+//   // This allows the datetime value to be turned into a string so we can work with it on the page
+//   feed = JSON.parse(JSON.stringify(feed))
+  
+//   return {
+//     props: { feed },
+//     revalidate: 10
+//   };
+// };

@@ -3,25 +3,47 @@ import { GetServerSideProps } from 'next';
 import { PostProps } from "../../components/Posts/Post"
 import prisma from '../../lib/prisma';
 import { SiInstagram, SiTiktok } from 'react-icons/Si';
+import supabase from '@/supabase';
 
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  let post = await prisma.post.findUnique({
-    where: {
-      id: String(params?.id),
-    },
-    include: {
-      author: {
-        select: { name: true },
-      },
-    },
-  });
+  const postId = params?.id as string;
 
-  post = JSON.parse(JSON.stringify(post))
+  try {
+    const { data: post, error } = await supabase
+      .from('posts')
+      .select()
+      .eq('id', postId)
+      .single();
 
-  return {
-    props: post,
-  };
+      if (error || !post) {
+        return {
+          notFound: true, // return a 404 status if the post is not found
+        };
+      }
+
+      const createdAtDate = new Date(post.created_at);
+      const formattedDate = createdAtDate.toISOString().split('T')[0];
+
+      const postData = {
+        title: post.title,
+        content: post.content,
+        author: post.author,
+        createdAt: formattedDate,
+      };
+
+      return {
+        props: {
+          post: postData,
+        },
+      };
+  } catch (error) {
+    console.error('Error fetching post:', error);
+
+    return {
+      notFound: true, // return a 404 status in case of an error
+    }
+  }
 };
 
 
@@ -29,12 +51,11 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 const Post: React.FC<PostProps> = (props) => {
 
   // To dynamically render whether a post is official or still a draft
-  let title = props.title
+  let title = props.post.title
   if (!props.published) {
     title = `${title} (Draft)`
   }
 
-  window.onload = window.scrollTo(0,350)
 
   return (
 
@@ -42,8 +63,8 @@ const Post: React.FC<PostProps> = (props) => {
       
       {/* <!--Title--> */}
       <div className="text-center pt-16 pb-8">
-        <p className="text-sm md:text-base text-green-500 font-bold">{props.createdAt.slice(0, 10)}</p>
-        <p className="text-lg md:text-xl text-green-500 font-bold">Written by {props.author?.name}</p>
+        <p className="text-sm md:text-base text-green-500 font-bold">{props.post.createdAt}</p>
+        <p className="text-lg md:text-xl text-green-500 font-bold">Written by {props.post.author}</p>
         <h1 className="py-2 font-bold break-normal text-3xl md:text-5xl">{title}</h1>
       </div>
 

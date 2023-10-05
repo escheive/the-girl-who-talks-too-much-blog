@@ -19,6 +19,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/ViewPost/Element.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/ViewPost/Element.js", "supabase.js"],
   "exclude": ["node_modules"]
 }

@@ -46,7 +46,7 @@ const Post: React.FC<{ post: PostProps }> = ({ post }) => {
 
             <div className="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow-lg p-6">
               <div className="flex items-center justify-end">
-                  <p className="text-gray-600 text-xs md:text-sm">{post.createdAt.slice(0, 10)}</p>
+                  <p className="text-gray-600 text-xs md:text-sm">{post.created_at.slice(0, 10)}</p>
               </div>
             </div>
         </div>
