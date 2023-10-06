@@ -29,9 +29,9 @@ body {
     border-radius: 4px; /* Border radius for rounded corners */
     padding: 4px; /* Padding inside the bubble menu */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle lift */
-  }
+}
   
-  .bubble-menu button {
+.bubble-menu button {
     background: none;
     border: none;
     cursor: pointer;
@@ -39,9 +39,38 @@ body {
     padding: 4px 8px;
     font-size: 14px;
     outline: none;
-  }
+}
   
-  .bubble-menu button.is-active {
+.bubble-menu button.is-active {
     background-color: #f0f0f0; /* Background color when button is active */
-  }
+}
 
+.tiptap-menu-container {
+    position: sticky;
+    top: 50px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tiptap-menu {
+    display: flex;
+    gap: 8px;
+}
+  
+.tiptap-menu button {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+  
+.tiptap-menu button.is-active {
+    background-color: #d8d8d8;
+}
