@@ -11,12 +11,10 @@ const Tiptap = () => {
   const editor = useEditor({
     extensions: [
         StarterKit,
-        Heading.configure({
-            levels: [1, 2, 3],
-        }),
+        Heading,
         Underline,
     ],
-    content: 'Write your blog here...',
+    content: '<h1>Write your blog here...</h1>',
   })
 
   return (
@@ -65,6 +63,24 @@ const Tiptap = () => {
                     className={editor.isActive('heading', { level: 3 }) ? 'is-active' : ''}
                 >
                     H3
+                </button>
+                <button
+                    onClick={() => editor.chain().focus().toggleHeading({ level: 4 }).run()}
+                    className={editor.isActive('heading', { level: 4 }) ? 'is-active' : ''}
+                >
+                    H4
+                </button>
+                <button
+                    onClick={() => editor.chain().focus().toggleHeading({ level: 5 }).run()}
+                    className={editor.isActive('heading', { level: 5 }) ? 'is-active' : ''}
+                >
+                    H5
+                </button>
+                <button
+                    onClick={() => editor.chain().focus().toggleHeading({ level: 6 }).run()}
+                    className={editor.isActive('heading', { level: 6 }) ? 'is-active' : ''}
+                >
+                    H6
                 </button>
                 <button
                     onClick={() => editor.chain().focus().toggleBulletList().run()}
