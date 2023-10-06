@@ -12,6 +12,8 @@
     "@floating-ui/react": "^0.19.1",
     "@prisma/client": "^4.10.1",
     "@supabase/supabase-js": "^2.38.0",
+    "@tiptap/extension-heading": "^2.1.11",
+    "@tiptap/extension-underline": "^2.1.11",
     "@tiptap/pm": "^2.1.11",
     "@tiptap/react": "^2.1.11",
     "@tiptap/starter-kit": "2.1.11",
