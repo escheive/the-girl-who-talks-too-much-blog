@@ -22,3 +22,26 @@ body {
     }
 }
 
+.bubble-menu {
+    display: flex;
+    background-color: #fff; /* Background color of the bubble menu */
+    border: 1px solid #ccc; /* Border color of the bubble menu */
+    border-radius: 4px; /* Border radius for rounded corners */
+    padding: 4px; /* Padding inside the bubble menu */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle lift */
+  }
+  
+  .bubble-menu button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin: 0;
+    padding: 4px 8px;
+    font-size: 14px;
+    outline: none;
+  }
+  
+  .bubble-menu button.is-active {
+    background-color: #f0f0f0; /* Background color when button is active */
+  }
+
