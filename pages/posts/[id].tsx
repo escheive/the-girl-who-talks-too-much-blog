@@ -27,7 +27,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 
       const postData = {
         title: post.title,
-        content: post.content,
+        content: post.content.content,
         author: post.author,
         createdAt: formattedDate,
       };
@@ -82,32 +82,8 @@ const Post: React.FC<PostProps> = (props) => {
             
 
             {/* <!--Lead Para--> */}
-            <p className="text-2xl md:text-3xl mb-5">
-              👋 Welcome fellow <a className="text-gray-800 hover:text-green-500 no-underline border-b-2 border-green-500" href="https://www.tailwindcss.com">Tailwind CSS</a> and <a className="text-gray-800 hover:text-green-500 no-underline border-b-2 border-green-500" href="https://www.ghost.org">Ghost</a> fan.  This starter template is an attempt to replicate the default Ghost theme <a className="text-gray-800 hover:text-green-500 no-underline border-b-2 border-green-500" href="https://demo.ghost.io/welcome">"Casper"</a> using Tailwind CSS and vanilla Javascript.
-            </p>
-
-            <p className="py-6">{props.content}</p>				
-
-            <ol>
-              <li className="py-3">Maecenas accumsan lacus sit amet elementum porta. Aliquam eu libero lectus. Fusce vehicula dictum mi. In non dolor at sem ullamcorper venenatis ut sed dui. Ut ut est quam. Suspendisse quam quam, commodo sit amet placerat in, interdum a ipsum. Morbi sit amet tellus scelerisque tortor semper posuere. Typing some more words just to see what these list items look like as they get larger. Trying to fiugre out the best way to go about making a dynamic blog post view page where Kate can create to her hearts content. This has been a little difficult to wrap my head around but Im getting there slowly I feel like.</li>
-              <li className="py-3">Morbi varius posuere blandit. Praesent gravida bibendum neque eget commodo. Duis auctor ornare mauris, eu accumsan odio viverra in. Proin sagittis maximus pharetra. Nullam lorem mauris, faucibus ut odio tempus, ultrices aliquet ex. Nam id quam eget ipsum luctus hendrerit. Ut eros magna, eleifend ac ornare vulputate, pretium nec felis.</li>
-              <li className="py-3">Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc vitae pretium elit. Cras leo mauris, tristique in risus ac, tristique rutrum velit. Mauris accumsan tempor felis vitae gravida. Cras egestas convallis malesuada. Etiam ac ante id tortor vulputate pretium. Maecenas vel sapien suscipit, elementum odio et, consequat tellus.</li>
-            </ol>
-
-            <blockquote className="border-l-4 border-green-500 italic my-8 pl-8 md:pl-12">Example of blockquote - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at ipsum eu nunc commodo posuere et sit amet ligula.</blockquote>
-
-            <p className="py-6">Example code block:</p>
-            <pre className="bg-gray-900 rounded text-white font-mono text-base p-4">
-              <code className="break-words whitespace-pre-wrap">
-                &lt;header className="site-header outer"&gt;
-                  &lt;div className="inner"&gt;
-                    
-                  &lt;/div&gt;
-                &lt;/header&gt;
-              </code>
-            </pre>
-
-                            
+            <p className="text-2xl md:text-3xl mb-5">{props.post.content}</p>		
+                     
             {/* <!--/ Post Content--> */}
                 
           </div>

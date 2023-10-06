@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@floating-ui/react": "^0.19.1",
-    "@next/font": "13.1.6",
     "@prisma/client": "^4.10.1",
     "@supabase/supabase-js": "^2.38.0",
     "@tiptap/pm": "^2.1.11",

@@ -8,19 +8,14 @@ import superjson from 'superjson'
 export type PostProps = {
   id: string;
   title: string;
-  author: {
-    name: string;
-    email: string;
-  } | null;
+  author: string;
   createdAt: string;
   updatedAt: string;
-  content: string;
+  content: object;
   published: boolean;
 };
 
 const Post: React.FC<{ post: PostProps }> = ({ post }) => {
-
-  const authorName = post.author ? post.author.name : "Unknown author";
 
   return (
 
@@ -36,12 +31,9 @@ const Post: React.FC<{ post: PostProps }> = ({ post }) => {
 
         <div className="w-full md:w-1/3 flex flex-col flex-grow flex-shrink">
             <div className="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow-lg">
-            <p className="w-full text-gray-600 text-sm md:text-base pt-6 px-6">{authorName}</p>
+            <p className="w-full text-gray-600 text-sm md:text-base pt-6 px-6">{post.author}</p>
             <div className="w-full font-bold md:text-2xl text-xl text-gray-900 px-6">{post.title}</div>
-            <ReactMarkdown 
-                className="text-gray-800 font-serif md:text-xl text-base px-6 mb-5"
-                children={post.content}
-            />
+            <p className="text-gray-800 font-serif md:text-xl text-base px-6 mb-5">{post.content.content}</p>
             </div>
 
             <div className="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow-lg p-6">

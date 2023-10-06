@@ -8,8 +8,7 @@ const nextConfig = {
           excluded: [],
         },
       ],
-    ],
-    reactStrictMode: true,
+    ]
   },
   images: {
     remotePatterns: [
