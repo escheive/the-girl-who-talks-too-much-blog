@@ -41,7 +41,7 @@ const AllPosts: React.FC<Props> = (props) => {
           <div className="bg-gray-200 w-full text-xl md:text-2xl text-gray-800 leading-normal rounded-t flex flex-wrap justify-between my-12">
 
               {/* Map over the posts and render them in different styles based on where they are on the page */}
-              {props.feed.map((post, i) => {
+              {props.posts.map((post, i) => {
                 if (i == 0 || i == 6 ) {
                   i = 0
                   return (

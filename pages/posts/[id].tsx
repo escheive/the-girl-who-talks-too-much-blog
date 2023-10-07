@@ -4,57 +4,38 @@ import { PostProps } from "../../components/Posts/Post"
 import prisma from '../../lib/prisma';
 import { SiInstagram, SiTiktok } from 'react-icons/Si';
 import supabase from '@/supabase';
-
+import { fetchSinglePostData } from '@/data';
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const postId = params?.id as string;
 
   try {
-    const { data: post, error } = await supabase
-      .from('posts')
-      .select()
-      .eq('id', postId)
-      .single();
+    // Fetch single post data using the fetchSinglePostData function
+    const post = await fetchSinglePostData(postId);
 
-      if (error || !post) {
-        return {
-          notFound: true, // return a 404 status if the post is not found
-        };
-      }
-
-      const createdAtDate = new Date(post.created_at);
-      const formattedDate = createdAtDate.toISOString().split('T')[0];
-
-      const postData = {
-        title: post.title,
-        content: post.content.content,
-        author: post.author,
-        createdAt: formattedDate,
-      };
-
+    if (!post) {
       return {
-        props: {
-          post: postData,
-        },
+        notFound: true, // return a 404 status if the post is not found
       };
+    }
+
+    return {
+      props: {
+        post,
+      },
+    };
   } catch (error) {
     console.error('Error fetching post:', error);
 
     return {
       notFound: true, // return a 404 status in case of an error
-    }
+    };
   }
 };
 
 
-
 const Post: React.FC<PostProps> = (props) => {
-
-  // To dynamically render whether a post is official or still a draft
-  let title = props.post.title
-  if (!props.published) {
-    title = `${title} (Draft)`
-  }
+  const { title, content, author, createdAt, updatedAt, published } = props.post;
 
 
   return (
@@ -63,9 +44,9 @@ const Post: React.FC<PostProps> = (props) => {
       
       {/* <!--Title--> */}
       <div className="text-center pt-16 pb-8">
-        <p className="text-sm md:text-base text-green-500 font-bold">{props.post.createdAt}</p>
-        <p className="text-lg md:text-xl text-green-500 font-bold">Written by {props.post.author}</p>
-        <h1 className="py-2 font-bold break-normal text-3xl md:text-5xl">{title}</h1>
+        <p className="text-sm md:text-base text-green-500 font-bold">{createdAt}</p>
+        <p className="text-lg md:text-xl text-green-500 font-bold">Written by {author}</p>
+        <h1 className="py-2 font-bold break-normal text-3xl md:text-5xl">{title}{!published ? `(Draft)` : null }</h1>
       </div>
 
       {/* <!--image--> */}
@@ -82,7 +63,7 @@ const Post: React.FC<PostProps> = (props) => {
             
 
             {/* <!--Lead Para--> */}
-            <p className="text-2xl md:text-3xl mb-5">{props.post.content}</p>		
+            <p className="text-2xl md:text-3xl mb-5">{content.content}</p>		
                      
             {/* <!--/ Post Content--> */}
                 
@@ -209,3 +190,43 @@ const Post: React.FC<PostProps> = (props) => {
 }
 
 export default Post;
+
+// export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+//   const postId = params?.id as string;
+
+//   try {
+//     const { data: post, error } = await supabase
+//       .from('posts')
+//       .select()
+//       .eq('id', postId)
+//       .single();
+
+//       if (error || !post) {
+//         return {
+//           notFound: true, // return a 404 status if the post is not found
+//         };
+//       }
+
+//       const createdAtDate = new Date(post.created_at);
+//       const formattedDate = createdAtDate.toISOString().split('T')[0];
+
+//       const postData = {
+//         title: post.title,
+//         content: post.content.content,
+//         author: post.author,
+//         createdAt: formattedDate,
+//       };
+
+//       return {
+//         props: {
+//           post: postData,
+//         },
+//       };
+//   } catch (error) {
+//     console.error('Error fetching post:', error);
+
+//     return {
+//       notFound: true, // return a 404 status in case of an error
+//     }
+//   }
+// };

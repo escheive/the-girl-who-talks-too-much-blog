@@ -6,6 +6,14 @@ body {
     text-align: center;
 }
 
+button {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
 .test {
     h1 {
         font-size: 48px;

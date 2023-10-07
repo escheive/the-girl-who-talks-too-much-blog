@@ -4,7 +4,6 @@ import { GetStaticProps } from 'next'
 import Post, { PostProps } from '../components/Posts/Post'
 import PostTwo from '@/components/Posts/PostTwo'
 // Database
-import prisma from '../lib/prisma'
 import { fetchPostsData } from '../data';
 // Style
 import { SiInstagram, SiTiktok } from 'react-icons/Si'

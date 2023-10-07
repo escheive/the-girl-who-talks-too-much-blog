@@ -4,6 +4,16 @@ import { useState } from "react";
 import Tiptap from '@/components/Tiptap';
 
 const create = () => {
+    const [postContent, setPostContent] = useState({
+        title: null,
+        author: null,
+        content: null,
+
+    })
+
+    const handleSubmit = () => {
+
+    }
 
     return (
 
