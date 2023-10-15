@@ -35,7 +35,10 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 
 
 const Post: React.FC<PostProps> = (props) => {
-  const { title, content, author, createdAt, updatedAt, published } = props.post;
+  console.log(props)
+  const { title, content, author, created_at, updated_at, published } = props.post;
+  const formattedCreatedDate = created_at.toLocaleDateString();
+  const formattedUpdatedDate = updated_at.toLocaleDateString();
 
 
   return (
@@ -44,7 +47,8 @@ const Post: React.FC<PostProps> = (props) => {
       
       {/* <!--Title--> */}
       <div className="text-center pt-16 pb-8">
-        <p className="text-sm md:text-base text-green-500 font-bold">{createdAt}</p>
+        <p className="text-sm md:text-base text-green-500 font-bold">{formattedCreatedDate}</p>
+        <p className="text-sm md:text-base text-green-500 font-bold">{formattedUpdatedDate}</p>
         <p className="text-lg md:text-xl text-green-500 font-bold">Written by {author}</p>
         <h1 className="py-2 font-bold break-normal text-3xl md:text-5xl">{title}{!published ? `(Draft)` : null }</h1>
       </div>
